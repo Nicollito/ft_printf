@@ -4,7 +4,7 @@
 int main(void)
 {
 	int	c = 158;
-	ft_printf("%d", c);
-	//printf("%c", c);
+	ft_printf("%X", c);
+	printf("%X", c);
 	return 0;
 }

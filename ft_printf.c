@@ -6,7 +6,7 @@
 /*   By: nimadela <nimadela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:46:39 by nimadela          #+#    #+#             */
-/*   Updated: 2024/11/28 16:26:21 by nimadela         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:38:45 by nimadela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_putnbr_base(int nbr, char *base)
 	}
 	if (nbr / bsize != 0)
 		ft_putnbr_base(nbr / bsize, base);
-	return (ft_putstr((char *)(nbr % bsize + '0')));
+	return (write(1, &base[nbr % bsize], 1));
 }
 
 static int	sort_format(const char *format, va_list ap)
@@ -43,12 +43,15 @@ static int	sort_format(const char *format, va_list ap)
 	if (*format == 's')
 		len = ft_putstr(va_arg(ap, char *));
 	if (*format == 'i' || *format == 'd')
-		ft_putnbr_base(va_arg(ap, int), "0123456789");
+		len = ft_putnbr_base(va_arg(ap, int), "0123456789");
 /* 	if (*format == 'p')
-	if (*format == 'u')
+	if (*format == 'u') */
 	if (*format == 'x')
+		len = ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
 	if (*format == 'X')
-	if (*format == '%') */
+		len = ft_putnbr_base(va_arg(ap, int), "0123456789ABCDEF");
+	if (*format == '%')
+		len = write(1, "%", 1);
 	if (len == -1)
 		return (-1);
 	return (len);
@@ -67,7 +70,6 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			temp = sort_format(format, ap);
-			//printf("test");
 			if (temp == -1)
 				return (-1);
 			len += temp;
