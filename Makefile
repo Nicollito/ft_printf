@@ -1,32 +1,26 @@
-.PHONY : all clean fclean re
+.PHONY: all re clean fclean libft
 
 NAME = libftprintf.a
+CC = cc 
+FLAGS = -Wall -Werror -Wextra
+SRC =    ft_printf.c
+OBJ = $(SRC:.c=.o)
 
-CC = cc
+all : $(NAME) libft
 
-CFLAGS = -Werror -Wextra -Wall
+%.o : %.c ft_printf.h Makefile libft/libft.h 
+	$(CC) $(FLAGS) -c $< -o $@
 
-SRCS =	ft_printf.c
+$(NAME) : $(OBJ)
+	ar -rcs $(NAME) $(OBJ) -libft
 
-OBJS = $(SRCS:.c=.o)
-
-all : $(NAME)
-
-%.o : %.c libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME) : $(OBJS)
-	ar -rcs $(NAME) $(OBJS) libft.a
-	
 clean : 
-	rm -rf $(OBJS)
-	rm -rf $(BOBJS)
+	rm -f $(OBJ)
 
-fclean : 
-	$(MAKE) clean
-	rm -rf $(NAME)
-	rm -rf .bonus
+fclean : clean
+	rm -f $(NAME)
 
-re : 
-	$(MAKE) fclean 
-	$(MAKE) all
+libft:
+	$(MAKE) -C libft
+
+re : clean all
