@@ -39,9 +39,8 @@ SRCS =	ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c
-
-BSRCS =	ft_lstnew.c \
+		ft_putnbr_fd.c \
+		ft_lstnew.c \
 		ft_lstadd_front.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
@@ -53,8 +52,6 @@ BSRCS =	ft_lstnew.c \
 
 OBJS = $(SRCS:.c=.o)
 
-BOBJS = $(BSRCS:.c=.o)
-
 all : $(NAME)
 
 %.o : %.c libft.h
@@ -63,20 +60,12 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 	
-bonus : .bonus
-
-.bonus : $(NAME) $(BOBJS)
-	ar -rcs $(NAME) *.o
-	touch .bonus
-
 clean : 
 	rm -rf $(OBJS)
-	rm -rf $(BOBJS)
 
 fclean : 
 	$(MAKE) clean
 	rm -rf $(NAME)
-	rm -rf .bonus
 
 re : 
 	$(MAKE) fclean 
