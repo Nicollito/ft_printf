@@ -6,7 +6,7 @@
 /*   By: nimadela <nimadela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:23:13 by nimadela          #+#    #+#             */
-/*   Updated: 2024/12/02 13:44:41 by nimadela         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:42:40 by nimadela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include "libft/libft.h"
+# include <stdarg.h>
 
 int	ft_printf(const char *format, ...);
 

@@ -6,12 +6,11 @@
 /*   By: nimadela <nimadela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:46:39 by nimadela          #+#    #+#             */
-/*   Updated: 2024/12/02 13:45:42 by nimadela         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:42:47 by nimadela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 
 static int	ft_putstr(const char *str)
 {
@@ -81,6 +80,10 @@ static int	sort_format(const char format, va_list ap)
 		len += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
 	if (format == '%')
 		len += (int)write(1, "%", 1);
+	if (format != 'c' && format != 's' && format != 'i' && format != 'd'
+		&& format != 'p' && format != 'u' && format != 'x' && format != 'X'
+		&& format != '%')
+		return (-1);
 	return (len);
 }
 
@@ -99,7 +102,7 @@ int	ft_printf(const char *format, ...)
 		{
 			i++;
 			if (!format[i])
-				return (0);
+				return (-1);
 			len += sort_format(format[i], ap);
 		}
 		else if (format[i - 1] != '%' || format[i - 2] == '%')
