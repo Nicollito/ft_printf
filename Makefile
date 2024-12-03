@@ -9,11 +9,14 @@ LIB = libft/*.o
 
 all : $(NAME) libft
 
-$(NAME) : $(OBJ) libft
-	ar -rcs $(NAME) $(LIB) $(OBJ)
-
 %.o : %.c 
 	$(CC) $(FLAGS) -c $< -o $@
+
+$(NAME) : $(OBJ) $(LIB)
+	ar -rcs $(NAME) $(LIB) $(OBJ)
+
+$(LIB) : libft
+	@true
 
 libft :
 	$(MAKE) -C libft
