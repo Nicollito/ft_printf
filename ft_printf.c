@@ -6,7 +6,7 @@
 /*   By: nimadela <nimadela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:46:39 by nimadela          #+#    #+#             */
-/*   Updated: 2024/12/03 12:42:47 by nimadela         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:55:04 by nimadela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,22 @@ static int	sort_format(const char format, va_list ap)
 	len = 0;
 	if (format == 'c')
 		len += write(1, &(char){(char)va_arg(ap, int)}, 1);
-	if (format == 's')
+	else if (format == 's')
 		len += ft_putstr(va_arg(ap, char *));
-	if (format == 'i' || format == 'd')
+	else if (format == 'i' || format == 'd')
 		len += ft_putnbr_base(va_arg(ap, int), "0123456789");
-	if (format == 'p')
+	else if (format == 'p')
 		len += ft_putnbr_base_ptr(va_arg(ap, unsigned long int),
 				"0123456789abcdef");
-	if (format == 'u')
+	else if (format == 'u')
 		len += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789");
-	if (format == 'x')
+	else if (format == 'x')
 		len += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789abcdef");
-	if (format == 'X')
+	else if (format == 'X')
 		len += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
-	if (format == '%')
+	else if (format == '%')
 		len += (int)write(1, "%", 1);
-	if (format != 'c' && format != 's' && format != 'i' && format != 'd'
-		&& format != 'p' && format != 'u' && format != 'x' && format != 'X'
-		&& format != '%')
+	else 
 		return (-1);
 	return (len);
 }
@@ -95,6 +93,8 @@ int	ft_printf(const char *format, ...)
 
 	len = 0;
 	i = 0;
+	if (!format)
+		return (-1);
 	va_start(ap, format);
 	while (format[i])
 	{
