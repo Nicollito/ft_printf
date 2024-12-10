@@ -6,7 +6,7 @@
 /*   By: nimadela <nimadela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:46:39 by nimadela          #+#    #+#             */
-/*   Updated: 2024/12/03 15:55:04 by nimadela         ###   ########.fr       */
+/*   Updated: 2024/12/10 10:16:10 by nimadela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	sort_format(const char format, va_list ap)
 		len += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
 	else if (format == '%')
 		len += (int)write(1, "%", 1);
-	else 
+	else
 		return (-1);
 	return (len);
 }
